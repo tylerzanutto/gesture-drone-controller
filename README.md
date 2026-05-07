@@ -1,41 +1,48 @@
-# gesture-drone-controller
+# ESP32 Glove Drone Controller
 
-This project is a glove-based drone controller using an ESP32 and MPU6050 motion sensor. The goal is to map hand tilt to drone movement commands and add buttons for mode switching and arm/disarm control.
+This project is a glove-based gesture controller for a drone using an ESP32 and an MPU6050 motion sensor. The goal is to control drone movement using hand tilt, with buttons for mode switching and arm/disarm control.
+
+The current plan is to use the glove as a wireless controller. A second ESP32 may later be used near a modified drone remote/controller to receive the glove data and convert it into joystick-style control signals.
+
+## Project Goal
+
+The final glove controller will include:
+
+- ESP32 microcontroller
+- MPU6050 accelerometer/gyroscope
+- Mode-changing button
+- Arm/disarm button
+- Power switch for the glove
+- LED indicator(s) for mode and/or armed status
+- Wireless communication to a second ESP32 or drone controller system
+
+## Control Design
+
+The glove will use two control modes.
+
+| Glove Action | Mode 1: Movement | Mode 2: Height/Yaw |
+|---|---|---|
+| Tilt forward/back | Drone forward/back | Drone up/down |
+| Tilt left/right | Drone left/right | Drone yaw left/right |
+| Mode button | Switch modes | Switch modes |
+| Arm/disarm button | Arm/disarm drone | Arm/disarm drone |
+
+The arm/disarm button is planned to use a long press for safety so the drone cannot be armed accidentally.
 
 ## Current Progress
 
+### Completed
+
 - Set up ESP32-WROOM-32 in Arduino IDE
-- Connected MPU6050 using I2C
+- Connected the MPU6050 to the ESP32 using I2C
 - Confirmed accelerometer and gyroscope values print in Serial Monitor
+- Mapped MPU6050 tilt values to a control range from -100 to +100
+- Added a dead zone so flat/near-flat readings return 0
+- Added and tested a 4-pin tactile push button for mode switching
+- Confirmed the button works using `INPUT_PULLUP`
+- Started combining tilt mapping with mode switching
 
-## Planned Features
+### Current Stage
 
-- Read hand tilt using the MPU6050
-- Convert tilt values into movement commands
-- Add a mode-switching button
-- Add an arm/disarm button
-- Add LED indicators for mode and armed state
-- Interface the glove controller with a modified drone controller
-
-## Hardware Used
-
-- ESP32-WROOM-32 development board
-- MPU6050 accelerometer/gyroscope module
-- Breadboard
-- Jumper wires
-- USB-C cable
-
-## Software
-
-- Arduino IDE
-- ESP32 board package by Espressif Systems
-- Adafruit MPU6050 library
-- Adafruit Unified Sensor library
-- Adafruit BusIO library
-
-## Setup Notes
-
-The ESP32 board required the Silicon Labs CP210x USB-to-UART driver before Windows detected the board as a COM port.
-
-The board was selected in Arduino IDE as:
-ESP32 Dev Module
+The current working stage is:
+code/05_tilt_with_mode_button/05_tilt_with_mode_button.ino
