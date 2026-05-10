@@ -42,6 +42,14 @@ The arm/disarm button is planned to use a long press for safety so the drone can
 - Confirmed the button works using `INPUT_PULLUP`
 - Started combining tilt mapping with mode switching
 
+### Wireless Glove Demo
+
+- Combined MPU6050 tilt mapping with ESP-NOW wireless communication
+- Set up the glove ESP32 as a wireless transmitter
+- Set up a second ESP32 as a receiver/display unit
+- Confirmed real tilt values are sent wirelessly from the glove to the receiver
+- Confirmed mode button switches between movement mode and height/yaw mode over wireless
+
 ### Current Stage
 
 The current working stage is:
