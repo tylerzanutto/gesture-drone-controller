@@ -53,4 +53,4 @@ The arm/disarm button is planned to use a long press for safety so the drone can
 ### Current Stage
 
 The current working stage is:
-code/05_tilt_with_mode_button/05_tilt_with_mode_button.ino
+code/07_wireless_glove_controller
