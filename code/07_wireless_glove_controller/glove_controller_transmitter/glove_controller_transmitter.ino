@@ -48,10 +48,7 @@ typedef struct ControlData {
 
 ControlData controlData;
 
-// Corrected callback for newer ESP32 board package versions
 void onDataSent(const wifi_tx_info_t *info, esp_now_send_status_t status) {
-  // Uncomment this line if you want to see send status
-  // Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Send Success" : "Send Fail");
 }
 
 void setup() {
@@ -61,7 +58,7 @@ void setup() {
   pinMode(modeButtonPin, INPUT_PULLUP);
 
   // MPU6050 setup
-  Wire.begin(21, 22); // SDA = GPIO 21, SCL = GPIO 22
+  Wire.begin(21, 22);
 
   Serial.println("Starting wireless glove controller...");
 
@@ -106,7 +103,7 @@ void loop() {
   // Read mode button
   int buttonState = digitalRead(modeButtonPin);
 
-  // Detect button press, not button hold
+  // Detect button press
   if (lastButtonState == HIGH && buttonState == LOW) {
     if (mode == 1) {
       mode = 2;
